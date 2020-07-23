@@ -1,0 +1,20 @@
+
+How to re-run failed test cases in TestNG framework?
+
+TestNG automatically generates xml file for failed test methods
+We use TestNG generated testng-failed.xml file located in test-output folder
+
+If you want to run it through CMD after a certain xml file automatically, create a batch file (for example, script.bat) and include both mvn commands:
+ E.g. 	
+ 		call mvn test -Drunner=loginTest.xml
+		call mvn test -Drunner=test-output/testng-failed.xml
+
+
+PARALLEL TESTING
+ 
+  We can achieve parallel testing of our test suites using:
+  -TestNG's built-in parallel feature in <suite> tag
+  -in-house Selenium Grid
+  -cloud Grid providers such as SauceLabs, BrowserStack
+
+  In testNG we can run methods, classes and tests in parallel.
