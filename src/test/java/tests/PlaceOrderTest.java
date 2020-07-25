@@ -3,9 +3,16 @@ package tests;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import com.github.javafaker.CreditCardType;
 import com.github.javafaker.Faker;
@@ -13,6 +20,7 @@ import com.github.javafaker.Faker;
 import pages.AllOrdersPage;
 import pages.LoginPage;
 import pages.OrderPage;
+import utilities.CSVUtility;
 
 public class PlaceOrderTest extends TestBase {
 
@@ -159,6 +167,80 @@ public class PlaceOrderTest extends TestBase {
 		assertEquals(actualAddress, address);
 
 	}
+	
+	
+	
+	@Test (dataProvider = "file")
+	public void verifyOrderDetailsDPFromCSV(String name, String address, String city, String state, String zip, String cardNo) throws InterruptedException {
+		OrderPage op = new OrderPage();
+
+		op.OrderPageLink.click();
+		
+		String product = "MyMoney";
+		op.selectProduct(product);
+
+		int quantity = 2;
+		op.quantity.sendKeys(quantity + "");
+
+		op.calculateButton.click();
+
+		
+
+		String expectedName = name;
+		op.name.sendKeys(expectedName);
+		String expectedAddress = address;
+		op.street.sendKeys(expectedAddress);
+		op.city.sendKeys(city);
+		op.state.sendKeys(state);
+		op.zip.sendKeys(zip);
+		String cardType = "Visa";
+		op.clickOnCheckBox(cardType);
+		op.cardNo.sendKeys(cardNo);
+		String expiry = "07/23";
+		op.expiry.sendKeys(expiry);
+		op.processButton.click();
+
+		SoftAssert sa = new SoftAssert();
+
+		sa.assertTrue(op.successText.getText().contains("New order has been successfully added."));
+
+		op.allOrdersPageLink.click();
+
+		String actualName = new AllOrdersPage().getCellText(1, 1);
+		String actualproduct = new AllOrdersPage().getCellText(1, 2);
+		String actualNoOfItems = new AllOrdersPage().getCellText(1, 3);
+		String actualDate = new AllOrdersPage().getCellText(1, 4);
+		String actualAddress = new AllOrdersPage().getCellText(1, 5);
+		String actualCity= new AllOrdersPage().getCellText(1, 6);
+		String actualState= new AllOrdersPage().getCellText(1, 7);
+		String actualZip= new AllOrdersPage().getCellText(1, 8);
+		String actualCardType= new AllOrdersPage().getCellText(1, 9);
+		String actualCardNo = new AllOrdersPage().getCellText(1, 10);
+		String actualExpiry= new AllOrdersPage().getCellText(1, 11);
+		
+		
+		sa.assertEquals(actualName, name);
+		sa.assertEquals(actualproduct, product);
+		sa.assertEquals(actualNoOfItems, quantity+"");
+		sa.assertEquals(actualDate, new SimpleDateFormat("MM/dd/yyyy").format(new Date()));
+		sa.assertEquals(actualAddress, address);
+		sa.assertEquals(actualCity, city);
+		sa.assertEquals(actualState, state);
+		sa.assertEquals(actualZip, zip);
+		sa.assertEquals(actualCardType, cardType);
+		sa.assertEquals(actualCardNo, cardNo);
+		sa.assertEquals(actualExpiry, expiry);
+		
+		sa.assertAll();
+
+
+
+
+
+
+
+	}
+	
 
 	
 	
@@ -198,5 +280,13 @@ public class PlaceOrderTest extends TestBase {
 		};
 
 }
+	
+			@DataProvider (name ="file", parallel = true)
+	
+			public Object[][] getDataFromCSV() throws IOException{
+					
+					return CSVUtility.extractData("data.csv");
+			
+			}
 
 }
