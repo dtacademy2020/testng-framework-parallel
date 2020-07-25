@@ -149,11 +149,10 @@ public class PlaceOrderTest extends TestBase {
 		op.allOrdersPageLink.click();
 
 		String actualName = new AllOrdersPage().getCellText(1, 1);
-		System.out.println(actualName);
+		
 		
 		String actualAddress = new AllOrdersPage().getCellText(1, 5);
-		System.out.println(actualAddress);
-
+		
 		
 		
 		assertEquals(actualName, name);
@@ -166,7 +165,7 @@ public class PlaceOrderTest extends TestBase {
 	
 
 	@DataProvider (name = "products", parallel = true) //parallel = true -> will enable the test that uses this
-														//Dataprovider to run in parallel
+											//Dataprovider to run in parallel
 	
 	public Object[][] get(){
 		

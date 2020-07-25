@@ -18,3 +18,16 @@ PARALLEL TESTING
   -cloud Grid providers such as SauceLabs, BrowserStack
 
   In testNG we can run methods, classes and tests in parallel.
+  
+  
+Multi-threaded program - it is a program with multiple threads running at the same time.
+synchronized - keyword used with methods and blocks to make them act in synchronized manner when there are multiple threads that access that method. Synchronization makes the program slower but safer.
+
+thread-safe -> synchronized
+
+
+Data-driven testing -> data drives the test -> running the same test with different sets of data.
+We do DDT in TestNG framework:
+ -@DataProvider
+ -Use external excel file. To read from excel we use Apache POI library.
+ -Use external database and read the data from database using JDBC library. 
