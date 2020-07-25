@@ -2,6 +2,7 @@ package pages;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -33,7 +34,12 @@ public class AllOrdersPage extends BasePage {
 	
 	
 	
-	
+	public String getCellText(int row, int column) {
+		
+		return Driver.getDriver().findElement(
+				By.xpath("//table[@id='ctl00_MainContent_orderGrid']//tr["+(row+1)+"]//td["+(column+1)+"]")).getText();
+		
+	}
 	
 	
 	

@@ -7,11 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 import utilities.BrowserUtilities;
 import utilities.Driver;
 
-public class BasePage {
+public abstract class BasePage {
 	
 	
 	
- public BasePage() {
+ public  BasePage() {
 		
 		PageFactory.initElements(Driver.getDriver(), this); // This statement is initializing the variables that are tagged
 															//with @FindBy annotations

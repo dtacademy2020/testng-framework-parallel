@@ -13,11 +13,11 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Driver {
+public  class Driver {
 	
 	private static final ThreadLocal<WebDriver> drivers =  new ThreadLocal<>(); // also called driverPool
 	
-	private Driver() {};
+	private  Driver() {};
 	
 	
 	public static synchronized WebDriver getDriver(String browser) {
@@ -96,6 +96,8 @@ public class Driver {
 	
 	public static WebDriver getDriver() {
 		return getDriver(null);
+		
+		
 	}
 
 	
@@ -106,6 +108,8 @@ public class Driver {
 		}
 		
 	}
+	
+	
 	
 	
 	
