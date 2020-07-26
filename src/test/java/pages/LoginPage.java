@@ -30,8 +30,8 @@ public class LoginPage {
 	public WebElement passwordField;
 	
 	
-	@FindBy(xpath = "//input[@value='Login']")
-	@CacheLookup 
+	@FindBy(xpath = "//input[@value='Logi']")
+	
 	public WebElement loginButton;
 	
 	

@@ -1,0 +1,76 @@
+TestNG Framework:
+
+
+Tell me about your framework?
+  
+  Start from mentioning the main COMPONENTS that build your framework:
+  		-Java -> programming language, write automation test scripts, build test logic
+  		-Selenium -> to interact with the browser, imitate human interaction
+  		-TestNG -> create test cases, runs tests, create reports, assertions
+  		-Maven -> build automation tool, dependecy management, run tests through CMD, 	In Continuous Integration/Continuous Delivery (CI/CD) pipeline
+  		-ExtentReports -> generate more comrehensive and detailed HTML report with timestamps, screenshots on failure.
+  
+  Architure/Structure:
+  	-Page Object Model -> design pattern that mandates that each page should have its own page object class where all webelements and helper methods that deal with the browser.
+  	-Page Factory -> the class that is responsible for initializing the Webelements with FindBy Annotations
+  	-Properties file -> Create a centralized location for all our test related data
+  	-Utility classes -> reusable methods
+  	-Singleton driver -> to prevent multiple instances of a driver to prevent overlaps within the framework. Because of this pattern, there is only a single instance of driver at any moment during the test.
+  	-Package structure -> page objects are stored in pages package, tests are stored separately in tests package.
+  	-Base classes -> TestBase, BasePage -> common methods and elements were placed in a superclass and all other classes extend from those
+
+  	Various testing types that your framework can support:
+  	
+  	-Data-driven testing -> DataProvider, Parameters, feed the data thru CSV file
+  	-CrossBrowser testing -> Thru XML file(multiple <test>s with different browsers as parameters), @Parameters in @BeforeMethod to get the browser type from XML file.
+  	-Parallel Testing -> Thru XML (in <suite> add parallel), adjust Driver class to support multi-threading
+  	-Headless Browser Testing -> add "--headless" option to Chrome and firefox, 3rd party -> HtmlUnit, Phantomjs
+  	-Group testing -> XML file (<groups>), marking tests with "groups" attribute
+  	-Re-running failed test cases autoamtically -> testng-failed.xml, create a batch job.
+  	-Tests can be triggered using mvn  command line command (mvn test -Drunner=someFile.xml) where I can pass what xml file to run because of maven-surefire plugin's configuration 
+
+  	
+  	Details:
+
+  	Driver class -> how signleton is implemented and what browsers are initialized
+  	BrowserUtilities class -> methods to interact with browser
+  	CSVReader class - to read from csv files
+  	Screenshots on failure -> @AfterMethod - talk how you implemented
+  	Dependencies -> webdrivermanager(bonigarcia), ashot(fullscreenshot)
+
+
+
+  	Java questions related to your framework
+
+  	OOP principles:
+
+
+  	Abstraction -> I have two abstract classes in my framework called BasePage, TestBase where all common methods and members are located. The reason why it is abstract is to prevent them from being initialized and serve as a abstract superclass that should be extended. 
+
+  	Encapsulation - Driver class is encapsulated by making the member (Webdriver) private and provideing public getter
+  	
+  	Inheritance - BasePage, TestBase are two classes that all page object classes and test classes extend from. Purpose: reusabilty, maintainability, DRY priciple, 
+  	
+  	Polymorphism - (One object can take many forms) Driver class -> WebDriver (Interface) can be initialized with various concrete drivers as ChromeDriver, EdgeDriver,etc. 
+  	
+  	method overriding/overloading 
+
+  	multi-threading/synchronized/thread-safe - ThreadLocal class, Driver pool
+
+  	Exceptions - in our ConfigReader, CSVReader, Utility class methods
+  	The exceptions that occur in Selenium:
+  	NoSuchElement
+  	StaleElementReferenceException
+  	NoAlertPresent
+
+
+
+
+
+
+  	
+
+
+
+
+  	

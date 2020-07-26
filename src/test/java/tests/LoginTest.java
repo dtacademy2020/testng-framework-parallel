@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
@@ -33,7 +34,7 @@ public class LoginTest extends TestBase {
 	
 	
 	
-	@Test
+	@Test (expectedExceptions = NoSuchElementException.class)
 	public void positiveLoginUsingPOM() throws IOException {
 		logger = reporter.createTest("Positive login using POM") ;
 
@@ -41,7 +42,7 @@ public class LoginTest extends TestBase {
 		logger.info("Entering username");
 		loginPage.usernameField.sendKeys(ConfigReader.getProperty("username"));
 		logger.info("Entering password");
-		loginPage.passwordField.sendKeys(ConfigReader.getProperty("password"));
+		loginPage.passwordField.sendKeys(ConfigReader.getProperty("password")+"svgxahg");
 		logger.info("Clicking login");
 		loginPage.loginButton.click();
 		

@@ -222,7 +222,10 @@ public class PlaceOrderTest extends TestBase {
 		sa.assertEquals(actualName, name);
 		sa.assertEquals(actualproduct, product);
 		sa.assertEquals(actualNoOfItems, quantity+"");
-		sa.assertEquals(actualDate, new SimpleDateFormat("MM/dd/yyyy").format(new Date()));
+		
+		String currentDate = new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+		sa.assertEquals(actualDate, currentDate);
+		
 		sa.assertEquals(actualAddress, address);
 		sa.assertEquals(actualCity, city);
 		sa.assertEquals(actualState, state);
